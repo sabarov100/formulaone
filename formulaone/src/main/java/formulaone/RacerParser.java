@@ -1,5 +1,5 @@
 package formulaone;
 
-public class Calculator {
+public class RacerParser {
 
 }
