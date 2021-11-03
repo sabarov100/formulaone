@@ -19,11 +19,7 @@ public class Facade {
         racersData.setStartData(fileReader.getData(nameStartTimeFile));
         racersData.setEndData(fileReader.getData(nameEndTimeFile));
         racerParser.setRasers(fileReader.getDataRacers(abbrevAndFullnameAndTeamOfRacersFile));
-        
-        
-        fileReader.getDataRacers(abbrevAndFullnameAndTeamOfRacersFile);
         return formatter.formatRacersResults(racerParser.setResultResers(racersData.getStartData(), racersData.getEndData()), racerParser);
     }
     
-
 }
