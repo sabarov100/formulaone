@@ -41,10 +41,10 @@ public class FileReader {
         return null;
     }
     
-    public static String spaces(int value) {
+    private String spaces(int value) {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < value; i++) {
-            sb.append(" ");
+            sb.append(SPACE);
         }
         return sb.toString();
     }
