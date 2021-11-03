@@ -15,7 +15,7 @@ public class Facade {
         this.formatter = formatter;
     }
     
-    public String bestRecersResultsOfRing(String nameStartTimeFile, String nameEndTimeFile, String abbrevAndFullnameAndTeamOfRacersFile) {
+    public String bestRacersResultsOfRing(String nameStartTimeFile, String nameEndTimeFile, String abbrevAndFullnameAndTeamOfRacersFile) {
         racersData.setStartData(fileReader.getData(nameStartTimeFile));
         racersData.setEndData(fileReader.getData(nameEndTimeFile));
         racerParser.setRasers(fileReader.getDataRacers(abbrevAndFullnameAndTeamOfRacersFile));
