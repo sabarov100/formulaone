@@ -6,28 +6,24 @@ import java.util.Map;
 
 public class RacerParser {
     
-    public Map<String, String> rasers;
+    Map<String, LocalDateTime> startData;
+    Map<String, LocalDateTime> endData;
+    Map<String, String[]> fullNameAndTeam;
+    Map<String, Racer> racers;
     
-    Map<String, String> getRasers() {
-        return rasers;
-    }
-
-    void setRasers(Map<String, String> rasers) {
-        this.rasers = rasers;
-    }
-
-    public Map<String, Long> setResultResers(Map<String, LocalDateTime> startData, Map<String, LocalDateTime> endData) {
-        Map<String, Long> resultRacers = new HashMap<String, Long>();
-        for (Map.Entry<String, LocalDateTime> entry : startData.entrySet()) {
+    public Map<String, Racer> initializationRacers(String fileNameAndTeam, 
+            String fileStartTime, String fileEndTime, FileReader fileReader) {
+        fullNameAndTeam = fileReader.getDataRacersAndTeams(fileNameAndTeam);
+        startData = fileReader.getData(fileStartTime);
+        endData = fileReader.getData(fileEndTime);
+        Map<String, Racer> racers = new HashMap<String, Racer>();
+        for (Map.Entry<String, String[]> entry : fullNameAndTeam.entrySet()) {
             String key = entry.getKey();
-            LocalDateTime value = entry.getValue();
-            long one = value.toLocalTime().toNanoOfDay();
-            long two = endData.get(key).toLocalTime().toNanoOfDay();
-            long three = Math.abs(one - two);
-            resultRacers.put(key, three);
+            String[] value = entry.getValue();
+            long resultTime =  Math.abs(startData.get(key).toLocalTime().toNanoOfDay() - endData.get(key).toLocalTime().toNanoOfDay());
+           racers.put(key, new Racer(key, value[0], value[1], startData.get(key), endData.get(key), resultTime));
         }
-        return resultRacers;
+        return racers;
     }
     
-
 }
