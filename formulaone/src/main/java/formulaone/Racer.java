@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class Racer {
     
-    public String abbreviation;
-    public String fullName;
-    public String team;
-    public LocalDateTime startTime;
-    public LocalDateTime endTime;
-    public long resultTime;
+    private String abbreviation;
+    private String fullName;
+    private String team;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private long resultTime;
     
     public Racer(String abbreviation, String fullName, String team, 
             LocalDateTime startTime, LocalDateTime endTime, long resultTime) {
@@ -20,6 +20,18 @@ public class Racer {
         this.startTime = startTime;
         this.endTime = endTime;
         this.resultTime = resultTime;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public long getResultTime() {
+        return resultTime;
     }
 
 }

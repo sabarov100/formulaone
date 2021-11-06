@@ -26,7 +26,7 @@ public class Formatter {
         for (Map.Entry<String, Racer> entry : listRacers.entrySet()) {
             String key = entry.getKey();
             Racer value = entry.getValue();
-            resultRacers.put(key, value.resultTime);
+            resultRacers.put(key, value.getResultTime());
         }
         List<String[]> list = new ArrayList();
         resultRacers.entrySet().stream()
@@ -36,11 +36,11 @@ public class Formatter {
         StringBuilder sb = new StringBuilder();
         for(int j = list.size() - 1; j > - 1; j--) {
             sb.append(list.size() - j).append(POINT).append((j > 9 ? spaces(2) : spaces(1)))
-                    .append(listRacers.get(list.get(j)[0]).fullName)
-                    .append(spaces(17 - listRacers.get(list.get(j)[0]).fullName.length()))
+                    .append(listRacers.get(list.get(j)[0]).getFullName())
+                    .append(spaces(17 - listRacers.get(list.get(j)[0]).getFullName().length()))
                     .append(SPACE).append(VERTICAL_LINE).append(SPACE)
-                    .append(listRacers.get(list.get(j)[0]).team)
-                    .append(spaces(26 - listRacers.get(list.get(j)[0]).team.length()))
+                    .append(listRacers.get(list.get(j)[0]).getTeam())
+                    .append(spaces(26 - listRacers.get(list.get(j)[0]).getTeam().length()))
                     .append(VERTICAL_LINE).append(SPACE)
                     .append(LocalTime.ofNanoOfDay(resultRacers.get(list.get(j)[0]))
                     .format(FORMATTER_TIME)).append(NEW_LINE);
