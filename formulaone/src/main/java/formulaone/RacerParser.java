@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class RacerParser {
     
+    private static final String EXCEPTION_MESSAGE = "FileReader didn't initialize.";
     Map<String, LocalDateTime> startData;
     Map<String, LocalDateTime> endData;
     Map<String, String[]> fullNameAndTeam;
@@ -13,6 +14,9 @@ public class RacerParser {
     
     public Map<String, Racer> initializationRacers(String fileNameAndTeam, 
             String fileStartTime, String fileEndTime, FileReader fileReader) {
+        if (fileReader == null) { 
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
         fullNameAndTeam = fileReader.getDataRacersAndTeams(fileNameAndTeam);
         startData = fileReader.getData(fileStartTime);
         endData = fileReader.getData(fileEndTime);

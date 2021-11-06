@@ -12,10 +12,14 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss.SSS");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss.SSS");
     private static final String UNDERLINE = "_";
+    private static final String EXCEPTION_MESSAGE = "File name cannot be NULL";
     
     public Map<String, LocalDateTime> getData(String fileName) {
+        if (fileName == null) { 
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
         try {
             Stream<String> streamFromFiles = Files.lines(Paths.get(fileName));
             return streamFromFiles
@@ -27,6 +31,9 @@ public class FileReader {
     }
     
     public Map<String, String[]> getDataRacersAndTeams(String fileName) {
+        if (fileName == null) { 
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
         try {
             Stream<String> streamFromFiles = Files.lines(Paths.get(fileName));
             return streamFromFiles
