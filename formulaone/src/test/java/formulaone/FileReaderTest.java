@@ -95,7 +95,7 @@ class FileReaderTest {
     @Test
     void testMessageIllegalArgumentExceptionGetData() {
         try {
-            setUp().getData(ACTUAL_NULL).toString();
+            setUp().getData(ACTUAL_NULL);
         }
         catch(IllegalArgumentException exception) {
             assertEquals(EXPECTED_EXCEPTION_MESSAGE, exception.getMessage());
@@ -105,7 +105,7 @@ class FileReaderTest {
     @Test
     void testMessageIllegalArgumentExceptionGetDataRacersAndTeams() {
         try {
-            setUp().getDataRacersAndTeams(ACTUAL_NULL).toString();
+            setUp().getDataRacersAndTeams(ACTUAL_NULL);
         }
         catch(IllegalArgumentException exception) {
             assertEquals(EXPECTED_EXCEPTION_MESSAGE, exception.getMessage());
