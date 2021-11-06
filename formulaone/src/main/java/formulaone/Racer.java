@@ -33,5 +33,10 @@ public class Racer {
     public long getResultTime() {
         return resultTime;
     }
+    
+    public String toString() {
+        return  "" + this.abbreviation + " " + this.fullName + " " + this.team
+                + " " + this.startTime + " " + this.endTime + " " + this.resultTime;
+    }
 
 }
