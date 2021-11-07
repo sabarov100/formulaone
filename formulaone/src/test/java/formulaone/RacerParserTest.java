@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class RacerParserTest {
     
-    private static final FileReader ACTUAL_NULL = null;
-    private static final String EXPECTED_EXCEPTION_MESSAGE = "FileReader didn't initialize.";
     private static final String EXPECTED = ""
             + "{VBM=VBM Valtteri Bottas MERCEDES 2018-05-24T12:00 2018-05-24T12:01:12.434 72434000000,"
             + " SVF=SVF Sebastian Vettel FERRARI 2018-05-24T12:02:58.917 2018-05-24T12:04:03.332 64415000000,"
@@ -42,25 +40,7 @@ class RacerParserTest {
 
     @Test
     void testInitializationRacers() {
-        assertEquals(EXPECTED, setUp().initializationRacers(Main.fileNameRacersInfo, 
-                Main.fileNameStartTime, Main.fileNameEndTime, setUpFileReader()).toString());
+        assertEquals(EXPECTED, setUp().initializationRacers(setUpFileReader().getDataRacersAndTeams(Main.fileNameRacersInfo),
+                setUpFileReader().getData(Main.fileNameStartTime), setUpFileReader().getData(Main.fileNameEndTime)));
     }
-    
-    @Test
-    void testThrowsIllegalArgumentExceptionInitializationRacers() {
-        assertThrows(IllegalArgumentException.class, () -> setUp().initializationRacers(Main.fileNameRacersInfo, 
-                Main.fileNameStartTime, Main.fileNameEndTime, ACTUAL_NULL));
-    }
-    
-    @Test
-    void testMessageIllegalArgumentExceptionInitializationRacers() {
-        try {
-            setUp().initializationRacers(Main.fileNameRacersInfo, 
-                    Main.fileNameStartTime, Main.fileNameEndTime, ACTUAL_NULL);
-        }
-        catch(IllegalArgumentException exception) {
-            assertEquals(EXPECTED_EXCEPTION_MESSAGE, exception.getMessage());
-        }
-    }
-
 }

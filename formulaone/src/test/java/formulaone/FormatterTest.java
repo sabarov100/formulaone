@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class FormatterTest {
     
-    private static final RacerParser ACTUAL_NULL = null;
-    private static final String EXPECTED_EXCEPTION_MESSAGE = "RacerParser didn't initialize.";
     private static final String EXPECTED = ""
             + "1.  Sebastian Vettel  | FERRARI                   | 01:04.415\n"
             + "2.  Daniel Ricciardo  | RED BULL RACING TAG HEUER | 01:12.013\n"
@@ -48,25 +46,9 @@ class FormatterTest {
 
     @Test
     void testFormatRacersResult() {
-        assertEquals(EXPECTED, setUpFormatter().formatRacersResult(Main.fileNameRacersInfo, 
-                Main.fileNameStartTime, Main.fileNameEndTime, setUpRacerParser(), setUpFileReader()));
-    }
-    
-    @Test
-    void testThrowsIllegalArgumentExceptionFormatRacersResult() {
-        assertThrows(IllegalArgumentException.class, () -> setUpFormatter().formatRacersResult(Main.fileNameRacersInfo, 
-                Main.fileNameStartTime, Main.fileNameEndTime, ACTUAL_NULL, setUpFileReader()));
-    }
-    
-    @Test
-    void testMessageIllegalArgumentExceptionFormatRacersResult() {
-        try {
-            setUpFormatter().formatRacersResult(Main.fileNameRacersInfo, 
-                    Main.fileNameStartTime, Main.fileNameEndTime, ACTUAL_NULL, setUpFileReader());
-        }
-        catch(IllegalArgumentException exception) {
-            assertEquals(EXPECTED_EXCEPTION_MESSAGE, exception.getMessage());
-        }
+        assertEquals(EXPECTED, setUpFormatter().formatRacersResult(setUpRacerParser()
+                .initializationRacers(setUpFileReader().getDataRacersAndTeams(Main.fileNameRacersInfo),
+                setUpFileReader().getData(Main.fileNameStartTime), setUpFileReader().getData(Main.fileNameEndTime))));
     }
 
 }

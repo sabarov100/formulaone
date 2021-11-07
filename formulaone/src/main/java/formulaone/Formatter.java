@@ -9,9 +9,6 @@ import java.util.Map;
 
 public class Formatter {
     
-    RacerParser racerParser;
-    Racer racer;
-    private static final String EXCEPTION_MESSAGE = "RacerParser didn't initialize.";
     private static final DateTimeFormatter FORMATTER_TIME = DateTimeFormatter.ofPattern("mm:ss.SSS");
     private static final String SPACE = " ";
     private static final String DASH = "-";
@@ -20,12 +17,7 @@ public class Formatter {
     private static final String EQUAL = "=";
     private static final String VERTICAL_LINE = "|";
     
-    public String formatRacersResult(String fileNameAndTeam, String fileStartTime, String fileEndTime,
-            RacerParser racerParser, FileReader fileReader) {
-        if (racerParser == null) { 
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
-        }
-        Map<String, Racer> listRacers = racerParser.initializationRacers(fileNameAndTeam, fileStartTime, fileEndTime, fileReader);
+    public String formatRacersResult(Map<String, Racer> listRacers) {
         Map<String, Long> resultRacers = new HashMap<>();
         for (Map.Entry<String, Racer> entry : listRacers.entrySet()) {
             String key = entry.getKey();

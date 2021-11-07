@@ -5,21 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RacerParser {
-    
-    private static final String EXCEPTION_MESSAGE = "FileReader didn't initialize.";
-    Map<String, LocalDateTime> startData;
-    Map<String, LocalDateTime> endData;
-    Map<String, String[]> fullNameAndTeam;
-    Map<String, Racer> racers;
-    
-    public Map<String, Racer> initializationRacers(String fileNameAndTeam, 
-            String fileStartTime, String fileEndTime, FileReader fileReader) {
-        if (fileReader == null) { 
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
-        }
-        fullNameAndTeam = fileReader.getDataRacersAndTeams(fileNameAndTeam);
-        startData = fileReader.getData(fileStartTime);
-        endData = fileReader.getData(fileEndTime);
+   
+    public Map<String, Racer> initializationRacers(Map<String, String[]> fullNameAndTeam, 
+            Map<String, LocalDateTime> startData, Map<String, LocalDateTime> endData) {
         Map<String, Racer> racers = new HashMap<String, Racer>();
         for (Map.Entry<String, String[]> entry : fullNameAndTeam.entrySet()) {
             String key = entry.getKey();
