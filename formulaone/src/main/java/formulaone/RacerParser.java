@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class RacerParser {
     
@@ -20,19 +19,16 @@ public class RacerParser {
         if (fullNameAndTeam == null || startData == null || endData == null) { 
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
-        Stream<String> streamFromCollection = fullNameAndTeam.stream();
-        Map<String, String[]> mapInfo = streamFromCollection
+        Map<String, String[]> mapInfo = fullNameAndTeam.stream()
                 .collect(Collectors.toMap(s -> s.substring(0, 3), 
                         s ->  s.substring(4, s.length()).split(UNDERLINE)));
-        streamFromCollection = startData.stream();
-        Map<String, LocalDateTime> mapStartTime = streamFromCollection
+        Map<String, LocalDateTime> mapStartTime = startData.stream()
                 .collect(Collectors.toMap(s -> s.substring(0, 3), 
                         s -> LocalDateTime.parse(s.substring(3), FORMATTER)));
-        streamFromCollection = endData.stream();
-        Map<String, LocalDateTime> mapEndTime = streamFromCollection
+        Map<String, LocalDateTime> mapEndTime = endData.stream()
                 .collect(Collectors.toMap(s -> s.substring(0, 3), 
                         s -> LocalDateTime.parse(s.substring(3), FORMATTER)));
-        Map<String, Racer> racers = new HashMap<String, Racer>();
+        Map<String, Racer> racers = new HashMap<>();
         mapInfo.keySet().stream().forEach(s -> racers.put(s, 
                 new Racer(s, mapInfo.get(s)[0], mapInfo.get(s)[1],
                 mapStartTime.get(s), mapEndTime.get(s),
