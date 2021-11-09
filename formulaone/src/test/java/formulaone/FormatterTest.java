@@ -47,8 +47,8 @@ class FormatterTest {
     @Test
     void testFormatRacersResult() {
         assertEquals(EXPECTED, setUpFormatter().formatRacersResult(setUpRacerParser()
-                .initializationRacers(setUpFileReader().getDataRacersAndTeams(Main.fileNameRacersInfo),
-                setUpFileReader().getData(Main.fileNameStartTime), setUpFileReader().getData(Main.fileNameEndTime))));
+                .initializationRacers(setUpFileReader().getListData(Main.fileNameRacersInfo),
+                setUpFileReader().getListData(Main.fileNameStartTime), setUpFileReader().getListData(Main.fileNameEndTime))));
     }
 
 }

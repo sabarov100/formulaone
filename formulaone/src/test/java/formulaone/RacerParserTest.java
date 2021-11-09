@@ -2,11 +2,15 @@ package formulaone;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 class RacerParserTest {
     
+    private static final List<String> ACTUAL_NULL = null;
+    private static final String EXPECTED_EXCEPTION_MESSAGE = "Argument cannot be NULL";
     private static final String EXPECTED = ""
             + "{VBM=VBM Valtteri Bottas MERCEDES 2018-05-24T12:00 2018-05-24T12:01:12.434 72434000000,"
             + " SVF=SVF Sebastian Vettel FERRARI 2018-05-24T12:02:58.917 2018-05-24T12:04:03.332 64415000000,"
@@ -40,7 +44,20 @@ class RacerParserTest {
 
     @Test
     void testInitializationRacers() {
-        assertEquals(EXPECTED, setUp().initializationRacers(setUpFileReader().getDataRacersAndTeams(Main.fileNameRacersInfo),
-                setUpFileReader().getData(Main.fileNameStartTime), setUpFileReader().getData(Main.fileNameEndTime)));
+        assertEquals(EXPECTED, setUp().initializationRacers(setUpFileReader().getListData(Main.fileNameRacersInfo),
+                setUpFileReader().getListData(Main.fileNameStartTime), 
+                setUpFileReader().getListData(Main.fileNameEndTime)).toString());
+    }
+    
+    @Test
+    void testMessageIllegalArgumentExceptionInitializationRacers() {
+        try {
+            setUp().initializationRacers(ACTUAL_NULL,
+                    setUpFileReader().getListData(Main.fileNameStartTime), 
+                    setUpFileReader().getListData(Main.fileNameEndTime));
+        }
+        catch(IllegalArgumentException exception) {
+            assertEquals(EXPECTED_EXCEPTION_MESSAGE, exception.getMessage());
+        }
     }
 }
