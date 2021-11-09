@@ -16,8 +16,8 @@ public class Facade {
     public String bestRacersResultsOfRing(String nameStartTimeFile, String nameEndTimeFile,
             String RacersFileInfo) {
         return formatter.formatRacersResult(racerParser.initializationRacers
-                (fileReader.getDataRacersAndTeams(RacersFileInfo),
-                fileReader.getData(nameStartTimeFile), 
-                fileReader.getData(nameEndTimeFile)));
+                (fileReader.getListData(RacersFileInfo),
+                fileReader.getListData(nameStartTimeFile), 
+                fileReader.getListData(nameEndTimeFile)));
     }
 }
