@@ -21,10 +21,10 @@ public class FileReader {
         if (fileName == null) { 
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
-        Path path = Path.of(fileName);
+        Path path = Paths.get(fileName);
         List<String> list = new ArrayList<>();
         try {
-            list = Files.readAllLines(path);
+            list = Files.readAllLines(path.toAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

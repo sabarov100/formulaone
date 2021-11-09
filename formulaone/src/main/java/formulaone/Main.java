@@ -2,10 +2,9 @@ package formulaone;
 
 public class Main {
     
-    public static String repository = "C:\\repositoryfour\\formulaone\\src\\main\\resources\\";
-    public static String fileNameStartTime = repository + "start.log";
-    public static String fileNameEndTime = repository + "end.log";
-    public static String fileNameRacersInfo = repository + "abbreviations.txt";
+    public static String fileNameStartTime = "src\\main\\resources\\start.log";
+    public static String fileNameEndTime = "src\\main\\resources\\end.log";
+    public static String fileNameRacersInfo = "src\\main\\resources\\abbreviations.txt";
    
     public static void main(String[] args) {
         
