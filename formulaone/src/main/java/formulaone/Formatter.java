@@ -3,9 +3,14 @@ package formulaone;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Formatter {
     
@@ -18,29 +23,25 @@ public class Formatter {
     private static final String VERTICAL_LINE = "|";
     
     public String formatRacersResult(Map<String, Racer> listRacers) {
-        Map<String, Long> resultRacers = new HashMap<>();
-        for (Map.Entry<String, Racer> entry : listRacers.entrySet()) {
-            String key = entry.getKey();
-            Racer value = entry.getValue();
-            resultRacers.put(key, value.getResultTime());
-        }
+        Stream<String> streamFromCollection = listRacers.keySet().stream();
+        Map<String, Long> resultRacers = streamFromCollection.collect
+                (Collectors.toMap(s -> s, s -> listRacers.get(s).getResultTime()));
         List<String[]> list = new ArrayList();
         resultRacers.entrySet().stream()
         .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-        .forEach(s -> list.add(s.toString().split(EQUAL))); 
-        
+        .forEach(s -> list.add(0, s.toString().split(EQUAL))); 
         StringBuilder sb = new StringBuilder();
-        for(int j = list.size() - 1; j > - 1; j--) {
-            sb.append(list.size() - j).append(POINT).append((j > 9 ? spaces(2) : spaces(1)))
-                    .append(listRacers.get(list.get(j)[0]).getFullName())
-                    .append(spaces(17 - listRacers.get(list.get(j)[0]).getFullName().length()))
+        for(int i = 0; i < list.size(); i++) {
+            sb.append(i + 1).append(POINT).append((i > 8 ? spaces(1) : spaces(2)))
+                    .append(listRacers.get(list.get(i)[0]).getFullName())
+                    .append(spaces(17 - listRacers.get(list.get(i)[0]).getFullName().length()))
                     .append(SPACE).append(VERTICAL_LINE).append(SPACE)
-                    .append(listRacers.get(list.get(j)[0]).getTeam())
-                    .append(spaces(26 - listRacers.get(list.get(j)[0]).getTeam().length()))
+                    .append(listRacers.get(list.get(i)[0]).getTeam())
+                    .append(spaces(26 - listRacers.get(list.get(i)[0]).getTeam().length()))
                     .append(VERTICAL_LINE).append(SPACE)
-                    .append(LocalTime.ofNanoOfDay(resultRacers.get(list.get(j)[0]))
+                    .append(LocalTime.ofNanoOfDay(resultRacers.get(list.get(i)[0]))
                     .format(FORMATTER_TIME)).append(NEW_LINE);
-            if(j == 4) {
+            if(i == 14) {
                 sb.append(dashs(61)).append(NEW_LINE);
             }
         }
