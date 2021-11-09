@@ -33,14 +33,11 @@ public class RacerParser {
                 .collect(Collectors.toMap(s -> s.substring(0, 3), 
                         s -> LocalDateTime.parse(s.substring(3), FORMATTER)));
         Map<String, Racer> racers = new HashMap<String, Racer>();
-        for (Map.Entry<String, String[]> entry : mapInfo.entrySet()) {
-            String key = entry.getKey();
-            String[] value = entry.getValue();
-            long resultTime =  Math.abs(mapStartTime.get(key).toLocalTime().toNanoOfDay()
-                    - mapEndTime.get(key).toLocalTime().toNanoOfDay());
-           racers.put(key, new Racer(key, value[0], value[1],
-                   mapStartTime.get(key), mapEndTime.get(key), resultTime));
-        }
+        mapInfo.keySet().stream().forEach(s -> racers.put(s, 
+                new Racer(s, mapInfo.get(s)[0], mapInfo.get(s)[1],
+                mapStartTime.get(s), mapEndTime.get(s),
+                Math.abs(mapStartTime.get(s).toLocalTime().toNanoOfDay()
+                - mapEndTime.get(s).toLocalTime().toNanoOfDay()))));
         return racers;
     }
     
